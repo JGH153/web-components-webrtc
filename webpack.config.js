@@ -5,29 +5,16 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: {
-    main: path.resolve(__dirname, "./src/index.js"),
+    main: "./src/index.js",
   },
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: "[name].bundle.js",
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: "webpack Boilerplate",
-      template: path.resolve(__dirname, "./src/index.html"), // template file
-      filename: "index.html", // output file
-    }),
-    new CleanWebpackPlugin(),
-    new CopyPlugin({
-      patterns: [
-        { from: "src/assets", to: "assets" },
-        { from: "src/styles.css", to: "styles.css" },
-        { from: "src/normalize.css", to: "normalize.css" },
-      ],
-    }),
-  ],
+  target: "web", // needed or live reload fails
+  // devtool: "inline-source-map",
   devServer: {
-    contentBase: "./dist",
+    contentBase: "dist",
     publicPath: "/",
     open: true,
     hot: false,
@@ -45,10 +32,6 @@ module.exports = {
           },
         },
       },
-      // {
-      //   test: /\.html$/i,
-      //   loader: "html-loader",
-      // },
       {
         test: /\.html$/i,
         use: ["raw-loader"],
@@ -59,6 +42,20 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./src/index.html", // template file
+      filename: "index.html", // output file
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: "src/assets", to: "assets" },
+        { from: "src/styles.css", to: "styles.css" },
+        { from: "src/normalize.css", to: "normalize.css" },
+      ],
+    }),
+  ],
   optimization: {
     minimize: false,
   },

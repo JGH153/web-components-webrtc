@@ -13,7 +13,7 @@ export class CardComponent extends HTMLElement {
     super();
 
     this.setupShadow();
-    console.log("setup3");
+    console.log("setup34");
   }
 
   connectedCallback() {
