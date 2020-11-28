@@ -1,3 +1,11 @@
-* {
-	background: red;
+/* * {
+  background: red;
+} */
+
+:host {
+  background: blue;
+}
+
+img {
+  max-width: 200px;
 }

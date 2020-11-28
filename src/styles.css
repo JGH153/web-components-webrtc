@@ -1,0 +1,6 @@
+/* Global styles, even to web components */
+@import "normalize.css";
+
+p {
+  font-size: 50px;
+}

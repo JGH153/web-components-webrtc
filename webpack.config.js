@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -17,16 +18,40 @@ module.exports = {
       filename: "index.html", // output file
     }),
     new CleanWebpackPlugin(),
+    new CopyPlugin({
+      patterns: [
+        { from: "src/assets", to: "assets" },
+        { from: "src/styles.css", to: "styles.css" },
+        { from: "src/normalize.css", to: "normalize.css" },
+      ],
+    }),
   ],
   devServer: {
     contentBase: "./dist",
+    publicPath: "/",
     open: true,
+    hot: false,
+    liveReload: true,
   },
   module: {
     rules: [
       {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
+          },
+        },
+      },
+      // {
+      //   test: /\.html$/i,
+      //   loader: "html-loader",
+      // },
+      {
         test: /\.html$/i,
-        loader: "html-loader",
+        use: ["raw-loader"],
       },
       {
         test: /\.css$/i,
@@ -35,7 +60,6 @@ module.exports = {
     ],
   },
   optimization: {
-    // We no not want to minimize our code.
-    minimize: true,
+    minimize: false,
   },
 };

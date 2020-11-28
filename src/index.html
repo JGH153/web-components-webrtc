@@ -12,14 +12,53 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body>
+    <template id="card-template">
+      <!-- <link rel="stylesheet" href="normalize.css" />
+      <link rel="stylesheet" href="theme.css" />
+      <link rel="stylesheet" href="card-component/card-component.css" /> -->
+
+      <div class="card-header">
+        <div class="header-image"></div>
+        <div class="card-header-text">
+          <div class="card-title">
+            <slot name="title"></slot>
+          </div>
+          <div class="card-subtitle">A Dog</div>
+        </div>
+      </div>
+      <img src="pondus-pics/0.jpg" class="image" id="card-img" />
+      <div class="card-content">
+        <p>
+          <slot name="content"></slot>
+        </p>
+      </div>
+      <div class="buttons">
+        <button class="button" id="remove-button">Remove</button>
+      </div>
+    </template>
+
     <div id="root"></div>
     <button class="mdc-button">
       <div class="mdc-button__ripple"></div>
       <span class="mdc-button__label">Button</span>
     </button>
-    ||<new-room></new-room>||
+    ||<new-room></new-room>|| ||<new-room></new-room>|| HELLO!
+    <div>hello</div>
+    <p>hello2</p>
+
+    <card-component class="card bold-title" id="card-0" image-name="1.jpg">
+      <span slot="title">Pondus 1</span>
+      <span slot="content">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+        repellendus id aut aliquam in nostrum officia corporis quam sit fuga
+        blanditiis tempore rerum nobis, aspernatur, adipisci illo, vero et
+        inventore.
+      </span>
+    </card-component>
   </body>
 </html>
