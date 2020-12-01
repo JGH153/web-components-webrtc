@@ -6,8 +6,11 @@ export class NewRoom extends HTMLElement {
   shadow;
   constructor() {
     super();
-
     this.setupShadow();
+  }
+
+  newRoom() {
+    console.log("new room");
   }
 
   setupShadow() {

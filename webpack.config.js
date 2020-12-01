@@ -52,6 +52,7 @@ module.exports = {
       patterns: [
         { from: "src/assets", to: "assets" },
         { from: "src/styles.css", to: "styles.css" },
+        { from: "src/index.css", to: "index.css" },
         { from: "src/normalize.css", to: "normalize.css" },
       ],
     }),

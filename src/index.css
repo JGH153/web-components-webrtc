@@ -1,0 +1,24 @@
+/* Global styles, but only in index.html */
+
+html,
+body {
+  height: 100%;
+  background-color: #121212;
+  color: #ffffff;
+}
+
+:root {
+  --font: "Open Sans", sans-serif;
+}
+
+* {
+  font-family: var(--font);
+}
+
+.page-container {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

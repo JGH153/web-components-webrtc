@@ -67,20 +67,5 @@ export class CardComponent extends HTMLElement {
 
   setupShadow() {
     this.shadow = setupShadow(this, html, css);
-
-    // this.shadow = this.attachShadow({ mode: "open" });
-    // const template = document.createElement("template");
-    // template.innerHTML = "<style>" + css + "</style>" + html;
-    // const templateContent = template.content;
-    // const shadowRoot = this.shadow.appendChild(templateContent.cloneNode(true));
-
-    console.log(this.shadow);
   }
-
-  // setupShadow() {
-  //   this.shadow = this.attachShadow({ mode: "open" });
-  //   const template = document.getElementById("card-template");
-  //   const templateContent = template.content;
-  //   this.shadow.appendChild(templateContent.cloneNode(true));
-  // }
 }

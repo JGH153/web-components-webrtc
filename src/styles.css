@@ -1,6 +1,16 @@
 /* Global styles, even to web components */
 @import "normalize.css";
+@import "assets/css-components/button.css";
+@import "assets/css-components/scrollbar.css";
 
-p {
-  font-size: 50px;
+html,
+body {
+}
+
+:root {
+  --font: "Open Sans", sans-serif;
+}
+
+* {
+  font-family: var(--font);
 }
