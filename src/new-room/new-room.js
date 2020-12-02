@@ -1,19 +1,22 @@
 import html from "./new-room.html";
 import css from "./new-room.css";
 import { setupShadow } from "../helpers";
+import { WebRTCService } from "../services/webrtc.service";
+import { Pages } from "../models/Pages";
 
 export class NewRoom extends HTMLElement {
-  shadow;
+  #shadow;
+
+  #WebRTCService = new WebRTCService();
+
   constructor() {
     super();
-    this.setupShadow();
+    this.#shadow = setupShadow(this, html, css);
   }
 
   newRoom() {
-    console.log("new room");
-  }
-
-  setupShadow() {
-    this.shadow = setupShadow(this, html, css);
+    this.#WebRTCService.newRoom();
+    const event = new CustomEvent("ChangePage", { detail: Pages.Room });
+    this.dispatchEvent(event);
   }
 }

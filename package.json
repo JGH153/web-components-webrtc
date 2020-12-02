@@ -9,7 +9,7 @@
   "scripts": {
     "build-watch": "webpack --watch",
     "start": "webpack serve --mode development",
-    "build": "webpack",
+    "build": "webpack --mode production",
     "browser-support": "npx browserslist"
   },
   "repository": {
