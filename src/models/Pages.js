@@ -1,8 +1,8 @@
 export const Pages = Object.freeze({
   Default: {
 		path: "/",
-		component: "new-room",
-		title: "New Room"
+		component: "home-page",
+		title: "Home"
 	},
   Room: {
 		path: "/room",

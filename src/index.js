@@ -1,4 +1,4 @@
-import { NewRoom } from "./new-room/new-room";
+import { HomePage } from "./home-page/home-page";
 import { CardComponent } from "./card-component/card-component";
 import { PageContainer } from "./page-container/page-container";
 import { RoomPage } from "./room-page/room-page";
@@ -23,7 +23,7 @@ new FirebaseService().onInit();
 
 // define all custom elements
 customElements.define("page-container", PageContainer);
-customElements.define("new-room", NewRoom);
+customElements.define("home-page", HomePage);
 customElements.define("room-page", RoomPage);
 customElements.define("room-video", RoomVideo);
 customElements.define("card-component", CardComponent);

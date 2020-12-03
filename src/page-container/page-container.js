@@ -8,11 +8,11 @@ export class PageContainer extends HTMLElement {
   #shadow;
 
   // default page
-  #currentPage = Pages.Room;
+  #currentPage = Pages.Default;
 
   constructor() {
     super();
-    this.#shadow = setupShadow(this, html, css);
+    setupShadow(this, html, css);
   }
 
   connectedCallback() {
@@ -20,21 +20,21 @@ export class PageContainer extends HTMLElement {
   }
 
   switchToCorrectPage() {
-    const prevPage = this.#shadow.getElementById("CurrentPage");
+    const prevPage = this.shadowRoot.getElementById("CurrentPage");
     if (prevPage) {
-      this.#shadow.removeChild(prevPage);
+      this.shadowRoot.removeChild(prevPage);
     }
     const newPage = document.createElement(this.#currentPage.component);
     newPage.id = "CurrentPage";
     newPage.addEventListener("ChangePage", (event) => this.setNewPage(event)); // too magical TODO fix
-    this.#shadow.appendChild(newPage);
+    this.shadowRoot.appendChild(newPage);
     document.title = this.#currentPage.title;
   }
 
   setNewPage(event) {
     //TODO set in route and then change based on listening for that. Need service for that
     // https://github.com/FermiDirak/fermidirak.github.io/blob/master/index.js
-    console.log(event.detail, "newPage");
+    // console.log(event.detail, "newPage");
     this.#currentPage = event.detail;
     this.switchToCorrectPage();
   }

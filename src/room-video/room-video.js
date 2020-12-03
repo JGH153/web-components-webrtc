@@ -4,8 +4,8 @@ import { setupShadow } from "../helpers";
 import { WebRTCService } from "../services/webrtc.service";
 
 export class RoomVideo extends HTMLElement {
-  #shadow;
   #localVideoStream;
+  #remoteVideoStream;
   //  inputs!
 
   static localVideoAttr = "local-video";
@@ -16,23 +16,24 @@ export class RoomVideo extends HTMLElement {
 
   constructor() {
     super();
-    this.#shadow = setupShadow(this, html, css);
+    setupShadow(this, html, css);
   }
 
   connectedCallback() {}
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    console.log("CardComponent Attributes changed: ", name, oldValue, newValue);
-    const value = JSON.parse(newValue);
-    if (name === RoomVideo.localVideoAttr) {
-      this.#localVideoStream = value;
-      console.log("post", this.#localVideoStream);
-      // this.#shadow.getElementById("localVideo").srcObject = this.#localVideoStream;
-    }
-  }
+  // attributeChangedCallback(name, oldValue, newValue) {
+  //   // console.log("CardComponent Attributes changed: ", name, oldValue, newValue);
+  //   if (name === RoomVideo.localVideoAttr) {
+  //   }
+  // }
 
   setLocalVideo(stream) {
     this.#localVideoStream = stream;
-    this.#shadow.getElementById("localVideo").srcObject = this.#localVideoStream;
+    this.shadowRoot.getElementById("localVideo").srcObject = this.#localVideoStream;
+  }
+
+  setRemoteVideo(stream) {
+    this.#remoteVideoStream = stream;
+    this.shadowRoot.getElementById("remoteVideo").srcObject = this.#remoteVideoStream;
   }
 }

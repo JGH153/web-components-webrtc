@@ -10,3 +10,8 @@
 h1 {
   text-align: center;
 }
+
+.input {
+  min-width: 300px;
+}
+

@@ -5,17 +5,24 @@ import { WebRTCService } from "../services/webrtc.service";
 import { RoomVideo } from "../room-video/room-video";
 
 export class RoomPage extends HTMLElement {
-  #shadow;
   #localVideoStream;
   #webRTCService = new WebRTCService();
+  #roomID;
 
   constructor() {
     super();
-    this.#shadow = setupShadow(this, html, css);
+    setupShadow(this, html, css);
   }
 
   connectedCallback() {
-    this.setupVideo(); // why not await here?
+    this.#roomID = this.#webRTCService.getRoomId();
+    this.shadowRoot.getElementById("roomID").innerText = this.#roomID;
+    this.addRoomIdToClipboard();
+    this.setupVideo();
+  }
+
+  addRoomIdToClipboard() {
+    navigator.clipboard.writeText(this.#roomID).then(() => {});
   }
 
   async setupVideo() {
@@ -27,17 +34,27 @@ export class RoomPage extends HTMLElement {
     }
 
     navigator.mediaDevices.getUserMedia(request).then(
-      (stream) => {
-        this.#localVideoStream = stream;
-        this.#webRTCService.setupPeerConnection(this.#localVideoStream);
-
-        const videoElement = this.#shadow.getElementById("video");
-        videoElement.setLocalVideo(this.#localVideoStream);
-        // this.setupDataChannel(); TODO
-      },
-      (error) => {
-        console.warn(error);
-      }
+      (stream) => this.onUserAllowVideo(stream),
+      (error) => console.warn(error)
     );
+  }
+
+  onRemoteVideo(remoteTrack) {
+    const videoElement = this.shadowRoot.getElementById("video");
+    videoElement.setRemoteVideo(remoteTrack);
+  }
+
+  onUserAllowVideo(stream) {
+    this.#localVideoStream = stream;
+    this.#webRTCService.setupPeerConnection(this.#localVideoStream, this.onRemoteVideo.bind(this));
+
+    const videoElement = this.shadowRoot.getElementById("video");
+    videoElement.setLocalVideo(this.#localVideoStream);
+
+    if (this.#webRTCService.isHost()) {
+      this.#webRTCService.connectToGuest();
+    } else {
+      this.#webRTCService.connectToHost();
+    }
   }
 }
