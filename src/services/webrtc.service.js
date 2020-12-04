@@ -1,8 +1,10 @@
+import { DataChannelService } from "./dataChannel.service";
 import { FirebaseService } from "./firebase.service";
 
 export class WebRTCService {
   static #instance;
-  #FirebaseService = new FirebaseService();
+  #firebaseService = new FirebaseService();
+  #dataChannelService = new DataChannelService();
   #myRtcConnection;
   #roomID; // FB collection id
   #isHost = null;
@@ -17,17 +19,21 @@ export class WebRTCService {
     WebRTCService.#instance = this;
   }
 
+  getIsHost() {
+    return this.#isHost;
+  }
+
   getRoomId() {
     return this.#roomID;
   }
 
   async newRoom() {
-    this.#roomID = await this.#FirebaseService.newRoom();
+    this.#roomID = await this.#firebaseService.newRoom();
     this.#isHost = true;
   }
 
   async joinRoom(roomId) {
-    const canJoin = await this.#FirebaseService.roomExist(roomId);
+    const canJoin = await this.#firebaseService.roomExist(roomId);
     if (canJoin) {
       this.#isHost = false;
       this.#roomID = roomId;
@@ -55,37 +61,24 @@ export class WebRTCService {
 
     this.#myRtcConnection.onicecandidate = (event) => {
       if (event.candidate) {
-        this.#FirebaseService.saveIce(this.#roomID, event.candidate.toJSON(), this.#isHost);
+        this.#firebaseService.saveIce(this.#roomID, event.candidate.toJSON(), this.#isHost);
       } else {
         // console.log(" All ICE candidates have been sent");
         console.log("Other!", event);
       }
     };
 
-    this.#setupDataChannel();
+    this.#dataChannelService.setupDataChannel(this.#myRtcConnection);
   }
 
   async createAndSaveOffer() {
     const offer = await this.#myRtcConnection.createOffer();
     await this.#myRtcConnection.setLocalDescription(offer);
-    this.#FirebaseService.saveOffer(this.#roomID, offer);
-  }
-
-  #setupDataChannel() {
-    this.#myRtcConnection.ondatachannel = (event) => {
-      const receiveChannel = event.channel;
-      receiveChannel.onmessage = (messageEvent) => {
-        this.onDataChannelNewMessage(messageEvent);
-      };
-    };
-
-    this.myDataChannel = this.#myRtcConnection.createDataChannel("myDataChannel");
+    this.#firebaseService.saveOffer(this.#roomID, offer);
   }
 
   async connectToOtherPerson() {
-
-
-    this.#FirebaseService.getRoomUpdates(this.#roomID, (doc) => {
+    this.#firebaseService.getRoomUpdates(this.#roomID, (doc) => {
       if (doc.guestAnswer && this.#isHost) {
         this.#addGuestAnswer(doc.guestAnswer);
       }
@@ -94,7 +87,7 @@ export class WebRTCService {
       }
     });
 
-    this.#FirebaseService.getRoomIceUpdates(this.#roomID, !this.#isHost, async (candidate) => {
+    this.#firebaseService.getRoomIceUpdates(this.#roomID, !this.#isHost, async (candidate) => {
       await this.#myRtcConnection.addIceCandidate(new RTCIceCandidate(candidate));
     });
 
@@ -108,7 +101,7 @@ export class WebRTCService {
     await this.#myRtcConnection.setRemoteDescription(offer);
     const answer = await this.#myRtcConnection.createAnswer();
     await this.#myRtcConnection.setLocalDescription(answer);
-    await this.#FirebaseService.saveAnswer(this.#roomID, answer);
+    await this.#firebaseService.saveAnswer(this.#roomID, answer);
   }
 
   async #addGuestAnswer(answer) {

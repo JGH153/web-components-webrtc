@@ -2,11 +2,14 @@ import html from "./room-page.html";
 import css from "./room-page.css";
 import { setupShadow } from "../helpers";
 import { WebRTCService } from "../services/webrtc.service";
+import { DataChannelService } from "../services/dataChannel.service";
 
 export class RoomPage extends HTMLElement {
   #localVideoStream;
   #webRTCService = new WebRTCService();
+
   #roomID;
+  #connected = false;
 
   constructor() {
     super();
@@ -16,12 +19,17 @@ export class RoomPage extends HTMLElement {
   connectedCallback() {
     this.#roomID = this.#webRTCService.getRoomId();
     this.shadowRoot.getElementById("roomID").innerText = this.#roomID;
-    this.addRoomIdToClipboard();
+    if (this.#webRTCService.getIsHost()) {
+      this.addRoomIdToClipboard();
+    }
     this.setupVideo();
   }
 
   async addRoomIdToClipboard() {
     await navigator.clipboard.writeText(this.#roomID);
+    // send to other tab auto
+    const bc = new BroadcastChannel("room-auto-join");
+    bc.postMessage(this.#roomID);
   }
 
   async setupVideo() {
@@ -42,6 +50,8 @@ export class RoomPage extends HTMLElement {
   onRemoteVideo(remoteTrack) {
     const videoElement = this.shadowRoot.getElementById("video");
     videoElement.setRemoteVideo(remoteTrack);
+    this.#connected = true;
+    this.showChat();
   }
 
   onUserAllowVideo(stream) {
@@ -53,5 +63,10 @@ export class RoomPage extends HTMLElement {
     videoElement.setLocalVideo(this.#localVideoStream);
 
     this.#webRTCService.connectToOtherPerson();
+  }
+
+  showChat() {
+    const chatElement = document.createElement("room-chat");
+    this.shadowRoot.appendChild(chatElement);
   }
 }

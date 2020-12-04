@@ -3,6 +3,7 @@ import { CardComponent } from "./card-component/card-component";
 import { PageContainer } from "./page-container/page-container";
 import { RoomPage } from "./room-page/room-page";
 import { RoomVideo } from "./room-page/room-video/room-video";
+import { RoomChat } from "./room-page/room-chat/room-chat";
 
 var firebaseConfig = {
   apiKey: "AIzaSyCgTQkGRQBqmvCY4u6wuJ1MTVQ7YPViUig",
@@ -22,4 +23,5 @@ customElements.define("page-container", PageContainer);
 customElements.define("home-page", HomePage);
 customElements.define("room-page", RoomPage);
 customElements.define("room-video", RoomVideo);
+customElements.define("room-chat", RoomChat);
 customElements.define("card-component", CardComponent);

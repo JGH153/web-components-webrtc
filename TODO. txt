@@ -5,7 +5,9 @@ How to apply material design to all components "/o duplicating for all?
 How to update callbacks on changes to html? Add func?
 Can easily do one or two way data binding?
 Handle dissconnect (throw to frontpage with error)
-
+ng-if
+Improve chat css and placement
+github actions
 
 ----
 Webrtc flow
