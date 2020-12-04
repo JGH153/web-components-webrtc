@@ -1,7 +1,6 @@
 export const Collections = Object.freeze({
   Room: "room",
-  ICE: "ice", // sub under Room
-  // TODO one sub for caller and one for answerer?
+  ICE: "ice", // sub collection under Room
 });
 
 export class FirebaseService {
@@ -13,43 +12,7 @@ export class FirebaseService {
       return FirebaseService.#instance;
     }
     FirebaseService.#instance = this;
-  }
-
-  onInit() {
     this.#firestore = firebase.firestore();
-  }
-
-  // https://github.com/webrtc/FirebaseRTC/blob/solution/public/app.js
-  async setOffer(roomId, offer) {
-    await this.#firestore
-      .collection(Collections.Room)
-      .doc(roomId)
-      .update({
-        hostOffer: {
-          type: offer.type,
-          sdp: offer.sdp,
-        },
-      });
-  }
-
-  async setAnswer(roomId, answer) {
-    await this.#firestore
-      .collection(Collections.Room)
-      .doc(roomId)
-      .update({
-        guestAnswer: {
-          type: answer.type,
-          sdp: answer.sdp,
-        },
-      });
-  }
-
-  // timestamp for time sort?
-  async addIce(roomId, iceString, fromHost) {
-    await this.#firestore.collection(Collections.Room).doc(roomId).collection(Collections.ICE).add({
-      ice: iceString,
-      fromHost: fromHost,
-    });
   }
 
   async newRoom() {
@@ -68,11 +31,38 @@ export class FirebaseService {
     return docSnapshot.exists;
   }
 
-  addToCollection(collection, item) {
-    return this.#firestore.collection(Collections.Room).add(item);
+  async saveOffer(roomId, offer) {
+    await this.#firestore
+      .collection(Collections.Room)
+      .doc(roomId)
+      .update({
+        hostOffer: {
+          type: offer.type,
+          sdp: offer.sdp,
+        },
+      });
   }
 
-  onRoomUpdates(roomId, onDataCallback) {
+  async saveAnswer(roomId, answer) {
+    await this.#firestore
+      .collection(Collections.Room)
+      .doc(roomId)
+      .update({
+        guestAnswer: {
+          type: answer.type,
+          sdp: answer.sdp,
+        },
+      });
+  }
+
+  async saveIce(roomId, iceString, fromHost) {
+    await this.#firestore.collection(Collections.Room).doc(roomId).collection(Collections.ICE).add({
+      ice: iceString,
+      fromHost: fromHost,
+    });
+  }
+
+  getRoomUpdates(roomId, onDataCallback) {
     this.#firestore
       .collection(Collections.Room)
       .doc(roomId)
@@ -81,7 +71,7 @@ export class FirebaseService {
       });
   }
 
-  onRoomIceUpdates(roomId, fromHost, onDataCallback) {
+  getRoomIceUpdates(roomId, fromHost, onDataCallback) {
     this.#firestore
       .collection(Collections.Room)
       .doc(roomId)

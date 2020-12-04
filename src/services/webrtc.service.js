@@ -21,51 +21,6 @@ export class WebRTCService {
     return this.#roomID;
   }
 
-  setupPeerConnection(stream, onRemoteVideo) {
-    const configuration = {
-      iceServers: [{ urls: "stun:stun2.1.google.com:19302" }],
-    };
-
-    this.#myRtcConnection = new RTCPeerConnection(configuration);
-
-    // setup stream listening
-    stream.getTracks().forEach((currentTrack) => {
-      this.#myRtcConnection.addTrack(currentTrack, new MediaStream());
-    });
-
-    this.#myRtcConnection.ontrack = (event) => {
-      onRemoteVideo(event.streams[0]);
-      this.#connected = true;
-    };
-
-    this.#myRtcConnection.onicecandidate = (event) => {
-      if (event.candidate) {
-        this.#FirebaseService.addIce(this.#roomID, event.candidate.toJSON(), this.#isHost);
-      } else {
-        // console.log(" All ICE candidates have been sent");
-      }
-    };
-
-    this.#setupDataChannel();
-  }
-
-  async createAndSaveOffer() {
-    const offer = await this.#myRtcConnection.createOffer();
-    await this.#myRtcConnection.setLocalDescription(offer);
-    this.#FirebaseService.setOffer(this.#roomID, offer);
-  }
-
-  #setupDataChannel() {
-    this.#myRtcConnection.ondatachannel = (event) => {
-      const receiveChannel = event.channel;
-      receiveChannel.onmessage = (messageEvent) => {
-        this.onDataChannelNewMessage(messageEvent);
-      };
-    };
-
-    this.myDataChannel = this.#myRtcConnection.createDataChannel("myDataChannel");
-  }
-
   async newRoom() {
     this.#roomID = await this.#FirebaseService.newRoom();
     this.#isHost = true;
@@ -80,29 +35,72 @@ export class WebRTCService {
     return canJoin;
   }
 
-  async connectToGuest() {
-    // TODO listen for room response, and ICE candidates from other
-    this.#FirebaseService.onRoomUpdates(this.#roomID, (doc) => {
-      if (doc.guestAnswer) {
-        this.#addGuestAnswer(doc.guestAnswer);
-      }
-    });
-    this.#FirebaseService.onRoomIceUpdates(this.#roomID, false, async (candidate) => {
-      await this.#myRtcConnection.addIceCandidate(new RTCIceCandidate(candidate));
+  setupPeerConnection(stream, onRemoteVideo) {
+    const configuration = {
+      iceServers: [{ urls: "stun:stun2.1.google.com:19302" }],
+    };
+
+    this.#myRtcConnection = new RTCPeerConnection(configuration);
+
+    // my video
+    stream.getTracks().forEach((currentTrack) => {
+      this.#myRtcConnection.addTrack(currentTrack, new MediaStream());
     });
 
-    await this.createAndSaveOffer();
+    // remote video
+    this.#myRtcConnection.ontrack = (event) => {
+      onRemoteVideo(event.streams[0]); // TODO support more than one
+      this.#connected = true;
+    };
+
+    this.#myRtcConnection.onicecandidate = (event) => {
+      if (event.candidate) {
+        this.#FirebaseService.saveIce(this.#roomID, event.candidate.toJSON(), this.#isHost);
+      } else {
+        // console.log(" All ICE candidates have been sent");
+        console.log("Other!", event);
+      }
+    };
+
+    this.#setupDataChannel();
   }
 
-  async connectToHost() {
-    this.#FirebaseService.onRoomUpdates(this.#roomID, (doc) => {
-      if (doc.hostOffer && !this.#haveAnswered) {
+  async createAndSaveOffer() {
+    const offer = await this.#myRtcConnection.createOffer();
+    await this.#myRtcConnection.setLocalDescription(offer);
+    this.#FirebaseService.saveOffer(this.#roomID, offer);
+  }
+
+  #setupDataChannel() {
+    this.#myRtcConnection.ondatachannel = (event) => {
+      const receiveChannel = event.channel;
+      receiveChannel.onmessage = (messageEvent) => {
+        this.onDataChannelNewMessage(messageEvent);
+      };
+    };
+
+    this.myDataChannel = this.#myRtcConnection.createDataChannel("myDataChannel");
+  }
+
+  async connectToOtherPerson() {
+
+
+    this.#FirebaseService.getRoomUpdates(this.#roomID, (doc) => {
+      if (doc.guestAnswer && this.#isHost) {
+        this.#addGuestAnswer(doc.guestAnswer);
+      }
+      if (doc.hostOffer && !this.#haveAnswered && !this.#isHost) {
         this.#addHostOffer(doc.hostOffer);
       }
     });
-    this.#FirebaseService.onRoomIceUpdates(this.#roomID, true, async (candidate) => {
+
+    this.#FirebaseService.getRoomIceUpdates(this.#roomID, !this.#isHost, async (candidate) => {
       await this.#myRtcConnection.addIceCandidate(new RTCIceCandidate(candidate));
     });
+
+    if (this.#isHost) {
+      await this.createAndSaveOffer();
+    }
   }
 
   async #addHostOffer(offer) {
@@ -110,14 +108,10 @@ export class WebRTCService {
     await this.#myRtcConnection.setRemoteDescription(offer);
     const answer = await this.#myRtcConnection.createAnswer();
     await this.#myRtcConnection.setLocalDescription(answer);
-    await this.#FirebaseService.setAnswer(this.#roomID, answer);
+    await this.#FirebaseService.saveAnswer(this.#roomID, answer);
   }
 
   async #addGuestAnswer(answer) {
     await this.#myRtcConnection.setRemoteDescription(answer);
-  }
-
-  isHost() {
-    return this.#isHost;
   }
 }

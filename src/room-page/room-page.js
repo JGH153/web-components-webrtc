@@ -2,7 +2,6 @@ import html from "./room-page.html";
 import css from "./room-page.css";
 import { setupShadow } from "../helpers";
 import { WebRTCService } from "../services/webrtc.service";
-import { RoomVideo } from "../room-video/room-video";
 
 export class RoomPage extends HTMLElement {
   #localVideoStream;
@@ -21,8 +20,8 @@ export class RoomPage extends HTMLElement {
     this.setupVideo();
   }
 
-  addRoomIdToClipboard() {
-    navigator.clipboard.writeText(this.#roomID).then(() => {});
+  async addRoomIdToClipboard() {
+    await navigator.clipboard.writeText(this.#roomID);
   }
 
   async setupVideo() {
@@ -33,6 +32,7 @@ export class RoomPage extends HTMLElement {
       request = { video: { deviceId: { exact: desired.deviceId } }, audio: false };
     }
 
+    // navigator.mediaDevices.getDisplayMedia().then(
     navigator.mediaDevices.getUserMedia(request).then(
       (stream) => this.onUserAllowVideo(stream),
       (error) => console.warn(error)
@@ -49,12 +49,9 @@ export class RoomPage extends HTMLElement {
     this.#webRTCService.setupPeerConnection(this.#localVideoStream, this.onRemoteVideo.bind(this));
 
     const videoElement = this.shadowRoot.getElementById("video");
+    // console.log(SON.stringify(this.#localVideoStream)); // can't stringify MediaStream
     videoElement.setLocalVideo(this.#localVideoStream);
 
-    if (this.#webRTCService.isHost()) {
-      this.#webRTCService.connectToGuest();
-    } else {
-      this.#webRTCService.connectToHost();
-    }
+    this.#webRTCService.connectToOtherPerson();
   }
 }
