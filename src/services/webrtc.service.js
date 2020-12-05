@@ -50,6 +50,7 @@ export class WebRTCService {
 
     // my video
     stream.getTracks().forEach((currentTrack) => {
+      console.log(currentTrack.getCapabilities());
       this.#myRtcConnection.addTrack(currentTrack, new MediaStream());
     });
 

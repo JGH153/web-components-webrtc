@@ -5,3 +5,27 @@
   align-items: center;
 }
 
+.inputs-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  min-width: 300px;
+  margin-right: 5px;
+}
+
+.chat-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#chatList {
+  min-width: 300px;
+  min-height: 50px;
+  margin-right: 5px;
+  border: 1px solid #ffffff;
+  padding: 5px;
+}

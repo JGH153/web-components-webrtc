@@ -35,7 +35,8 @@ export class RoomPage extends HTMLElement {
   async setupVideo() {
     const devices = await navigator.mediaDevices.enumerateDevices();
     const desired = devices.find((current) => current.label === "Logi Capture");
-    let request = { video: true, audio: false };
+    const videoResRequest = { width: { ideal: 1920 }, height: { ideal: 1080 }, frameRate: { ideal: 60 } };
+    let request = { video: videoResRequest, audio: false };
     if (desired) {
       request = { video: { deviceId: { exact: desired.deviceId } }, audio: false };
     }
@@ -43,7 +44,10 @@ export class RoomPage extends HTMLElement {
     // navigator.mediaDevices.getDisplayMedia().then(
     navigator.mediaDevices.getUserMedia(request).then(
       (stream) => this.onUserAllowVideo(stream),
-      (error) => console.warn(error)
+      (error) => {
+        console.warn(error);
+        alert("Can't get camera");
+      }
     );
   }
 

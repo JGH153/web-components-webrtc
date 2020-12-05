@@ -6,8 +6,9 @@ How to update callbacks on changes to html? Add func?
 Can easily do one or two way data binding?
 Handle dissconnect (throw to frontpage with error)
 ng-if
-Improve chat css and placement
 github actions
+create generic text-input component that uses WC inputs and event outputs correctly
+	with enter to send as event (onInputEnter)
 
 ----
 Webrtc flow
@@ -16,3 +17,4 @@ Add offer to room as host
 Guest join and add response based on host offer
 ICE <->
 Done
+	
