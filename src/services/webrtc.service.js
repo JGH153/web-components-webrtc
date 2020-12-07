@@ -50,7 +50,7 @@ export class WebRTCService {
 
     // my video
     stream.getTracks().forEach((currentTrack) => {
-      console.log(currentTrack.getCapabilities());
+      // console.log(currentTrack.getCapabilities());
       this.#myRtcConnection.addTrack(currentTrack, new MediaStream());
     });
 
@@ -65,7 +65,7 @@ export class WebRTCService {
         this.#firebaseService.saveIce(this.#roomID, event.candidate.toJSON(), this.#isHost);
       } else {
         // console.log(" All ICE candidates have been sent");
-        console.log("Other!", event);
+        // console.log("Other!", event);
       }
     };
 

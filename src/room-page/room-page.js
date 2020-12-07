@@ -3,6 +3,7 @@ import css from "./room-page.css";
 import { setupShadow } from "../helpers";
 import { WebRTCService } from "../services/webrtc.service";
 import { DataChannelService } from "../services/dataChannel.service";
+import { Pages } from "../models/Pages";
 
 export class RoomPage extends HTMLElement {
   #localVideoStream;
@@ -17,6 +18,13 @@ export class RoomPage extends HTMLElement {
   }
 
   connectedCallback() {
+    // no room id, no fun
+    if (!this.#webRTCService.getRoomId()) {
+      const event = new CustomEvent("ChangePage", { detail: Pages.Home });
+      this.dispatchEvent(event);
+      return false;
+    }
+
     this.#roomID = this.#webRTCService.getRoomId();
     this.shadowRoot.getElementById("roomID").innerText = this.#roomID;
     if (this.#webRTCService.getIsHost()) {
@@ -46,7 +54,7 @@ export class RoomPage extends HTMLElement {
       (stream) => this.onUserAllowVideo(stream),
       (error) => {
         console.warn(error);
-        alert("Can't get camera");
+        alert("Can't get camera :(");
       }
     );
   }

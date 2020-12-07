@@ -10,6 +10,9 @@ github actions
 create generic text-input component that uses WC inputs and event outputs correctly
 	with enter to send as event (onInputEnter)
 
+throw back to home if reload on room
+
+
 ----
 Webrtc flow
 Create room 

@@ -21,6 +21,7 @@ module.exports = (env, argv) => {
       open: true,
       hot: false,
       liveReload: true,
+      historyApiFallback: true, // SPA
     },
     module: {
       rules: [

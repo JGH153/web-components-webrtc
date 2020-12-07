@@ -1,9 +1,10 @@
 import { HomePage } from "./home-page/home-page";
 import { CardComponent } from "./card-component/card-component";
-import { PageContainer } from "./page-container/page-container";
+import { PageRouter } from "./page-router/page-router";
 import { RoomPage } from "./room-page/room-page";
 import { RoomVideo } from "./room-page/room-video/room-video";
 import { RoomChat } from "./room-page/room-chat/room-chat";
+import { AboutPage } from "./about-page/about-page";
 
 var firebaseConfig = {
   apiKey: "AIzaSyCgTQkGRQBqmvCY4u6wuJ1MTVQ7YPViUig",
@@ -19,8 +20,9 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 // define all custom elements
-customElements.define("page-container", PageContainer);
+customElements.define("page-router", PageRouter);
 customElements.define("home-page", HomePage);
+customElements.define("about-page", AboutPage);
 customElements.define("room-page", RoomPage);
 customElements.define("room-video", RoomVideo);
 customElements.define("room-chat", RoomChat);

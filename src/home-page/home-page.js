@@ -35,7 +35,7 @@ export class HomePage extends HTMLElement {
 
   async joinRoom() {
     if (!this.#inputRoomId) {
-      alert("No Room"); // TODO improve
+      alert("No Room");
       return;
     }
     console.log(this.#inputRoomId);
@@ -44,12 +44,16 @@ export class HomePage extends HTMLElement {
       alert(" Room not found");
       return;
     }
-    // await this.#WebRTCService.joinRoom(this.#inputRoomId);
     this.#gotoRoomPage();
   }
 
   roomIdInputChange(element) {
     this.#inputRoomId = element.value;
+  }
+
+  gotoAboutPage() {
+    const event = new CustomEvent("ChangePage", { detail: Pages.About });
+    this.dispatchEvent(event);
   }
 
   #gotoRoomPage() {
