@@ -28,4 +28,28 @@
   margin-right: 5px;
   border: 1px solid #ffffff;
   padding: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.my-message,
+.other-message {
+  border-radius: 18px;
+  padding: 8px 12px;
+  margin: 5px 2px;
+  display: inline-block;
+}
+.my-message {
+  background-color: rgb(0, 132, 255);
+  text-align: right;
+
+  margin-left: auto;
+}
+
+.other-message {
+  background-color: rgb(62, 64, 66);
+  margin-right: auto;
 }

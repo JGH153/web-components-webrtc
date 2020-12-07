@@ -34,7 +34,9 @@ export class RoomChat extends HTMLElement {
 
   addMessageToChat(message, myOwn) {
     const byText = myOwn ? "You: " : "Guest: ";
+    const cssClass = myOwn ? "my-message" : "other-message ";
     const chatEl = this.shadowRoot.getElementById("chatList");
-    chatEl.innerHTML = chatEl.innerHTML + "<br>" + byText + message;
+    const wrappedMessage = `<div class="${cssClass}"><b>${byText}</b>${message}</div>`;
+    chatEl.innerHTML = chatEl.innerHTML + wrappedMessage;
   }
 }
