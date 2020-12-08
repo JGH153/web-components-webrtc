@@ -16,7 +16,6 @@ export class RoomChat extends HTMLElement {
 
   connectedCallback() {
     this.#DataChannelService.getNewMessages((message) => {
-      console.log("message!, ", message);
       this.addMessageToChat(message, false);
     });
   }

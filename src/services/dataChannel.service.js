@@ -22,7 +22,6 @@ export class DataChannelService {
     myRtcConnection.ondatachannel = (event) => {
       const receiveChannel = event.channel;
       receiveChannel.onmessage = (messageEvent) => {
-        console.log("message!", messageEvent.data);
         if (this.#callbackOnMessage) {
           this.#callbackOnMessage(messageEvent.data);
         }

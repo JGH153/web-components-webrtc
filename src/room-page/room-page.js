@@ -40,13 +40,21 @@ export class RoomPage extends HTMLElement {
     bc.postMessage(this.#roomID);
   }
 
+  #getDesiredCameraId(devices) {
+    if (this.#webRTCService.getIsHost()) {
+      return devices.find((current) => current.label === "Logi Capture");
+    } else {
+      return devices.find((current) => current.label === "Microsoft® LifeCam Studio(TM) (045e:0772)");
+    }
+  }
+
   async setupVideo() {
     const devices = await navigator.mediaDevices.enumerateDevices();
-    const desired = devices.find((current) => current.label === "Logi Capture");
+    const desired = this.#getDesiredCameraId(devices);
     const videoResRequest = { width: { ideal: 1920 }, height: { ideal: 1080 }, frameRate: { ideal: 60 } };
     let request = { video: videoResRequest, audio: false };
     if (desired) {
-      request = { video: { deviceId: { exact: desired.deviceId } }, audio: false };
+      request = { video: { deviceId: desired.deviceId }, audio: false };
     }
 
     // navigator.mediaDevices.getDisplayMedia().then(
