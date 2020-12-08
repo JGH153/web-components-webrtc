@@ -1,0 +1,25 @@
+<h1>Outside</h1>
+<my-element></my-element>
+
+<template id="my-element-template">
+  <style>
+    * {
+      background: red;
+    }
+  </style>
+  <h1>Inside</h1>
+</template>
+
+<script>
+  class MyElement extends HTMLElement {
+    constructor() {
+      super();
+
+      const shadow = this.attachShadow({ mode: "open" });
+      const template = document.getElementById("my-element-template").content;
+      shadow.appendChild(template.cloneNode(true));
+    }
+  }
+
+  customElements.define("my-element", MyElement);
+</script>
