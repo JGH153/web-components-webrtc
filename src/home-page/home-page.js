@@ -6,7 +6,6 @@ import { Pages } from "../models/Pages";
 
 export class HomePage extends HTMLElement {
   #WebRTCService = new WebRTCService();
-  #inputRoomId = "";
 
   #bc;
 
@@ -15,11 +14,11 @@ export class HomePage extends HTMLElement {
     setupShadow(this, html, css);
   }
 
-  // auto join for local dev
   connectedCallback() {
+    // auto join for local dev
     this.#bc = new BroadcastChannel("room-auto-join");
     this.#bc.onmessage = (message) => {
-      this.#inputRoomId = message.data;
+      this.shadowRoot.getElementById("roomIdInput").value = message.data;
       this.joinRoom();
     };
   }
@@ -34,21 +33,17 @@ export class HomePage extends HTMLElement {
   }
 
   async joinRoom() {
-    if (!this.#inputRoomId) {
+    const inputRoomId = this.shadowRoot.getElementById("roomIdInput").value;
+    if (!inputRoomId) {
       alert("No Room");
       return;
     }
-    console.log(this.#inputRoomId);
-    const canJoin = await this.#WebRTCService.joinRoom(this.#inputRoomId);
+    const canJoin = await this.#WebRTCService.joinRoom(inputRoomId);
     if (!canJoin) {
       alert(" Room not found");
       return;
     }
     this.#gotoRoomPage();
-  }
-
-  roomIdInputChange(element) {
-    this.#inputRoomId = element.value;
   }
 
   gotoAboutPage() {

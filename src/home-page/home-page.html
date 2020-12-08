@@ -2,7 +2,14 @@
 <button class="button" onclick="this.newRoom()">New Room</button>
 <h1>Join Room</h1>
 <div>
-  <input class="input" type="text" placeholder="Room ID" onchange="this.roomIdInputChange(this)" autofocus />
+  <input
+    is="text-input"
+    id="roomIdInput"
+    class="input"
+    type="text"
+    placeholder="Room ID"
+    autofocus
+  />
   <button class="button" onclick="this.joinRoom()">Join Room</button>
 </div>
 <h1>About</h1>

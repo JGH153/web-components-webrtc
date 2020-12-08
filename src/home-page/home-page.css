@@ -11,6 +11,6 @@ h1 {
   text-align: center;
 }
 
-.input {
+#roomIdInput {
   min-width: 300px;
 }

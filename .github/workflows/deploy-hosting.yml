@@ -1,0 +1,31 @@
+name: Deploy to firebase hosting
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install, build, and deploy hosting
+      run: |
+        npm install
+        npm run build 
+        npm i -g firebase-tools
+        firebase use web-components-webrtc --token ${{ secrets.FIREBASE_TOKEN }}
+        firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} --only hosting
+      env:
+        CI: true
