@@ -4,13 +4,14 @@ import { setupShadow } from "../helpers";
 import { Pages } from "../models/Pages";
 
 export class AboutPage extends HTMLElement {
+  #goHomeEvent = new CustomEvent("ChangePage", { detail: Pages.Home });
+
   constructor() {
     super();
     setupShadow(this, html, css);
   }
 
   back() {
-    const event = new CustomEvent("ChangePage", { detail: Pages.Home });
-    this.dispatchEvent(event);
+    this.dispatchEvent(this.#goHomeEvent);
   }
 }

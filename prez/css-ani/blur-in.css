@@ -1,0 +1,25 @@
+.blur-in {
+  color: transparent !important;
+  animation: blur-in-ani 1s ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes blur-in-ani {
+  0% {
+    text-shadow: 0 0 1000px #fff;
+    opacity: 0;
+  }
+  25% {
+    text-shadow: 0 0 100px #fff;
+    opacity: 0;
+  }
+  50% {
+    text-shadow: 0 0 90px #fff;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    text-shadow: 0 0 0px #fff;
+  }
+}

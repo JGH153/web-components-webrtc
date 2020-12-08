@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Frontend Dev-Ops</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
+    <link rel="stylesheet" href="product-colors.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+
+    <style>
+      /* only for prez, not for speaker view */
+      @media screen and (min-width: 1500px) {
+        .slides {
+          width: 88% !important;
+        }
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        text-transform: none !important;
+      }
+
+      ol,
+      ul {
+        font-size: 150%;
+      }
+
+      i {
+        font-style: italic;
+      }
+
+      .opacity-hidden {
+        opacity: 0;
+      }
+
+      .npm-script {
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+        background: #272822;
+        text-align: left;
+        font-family: monospace;
+        text-transform: none;
+        font-size: 30px;
+        width: 89%;
+        margin: auto;
+        padding: 2px 6px;
+        margin-bottom: 5px;
+      }
+
+      .npm-script .ng {
+        color: #cb3837;
+      }
+      .npm-script .args {
+        color: #767676;
+      }
+
+      blockquote {
+        padding: 5px 15px !important;
+      }
+
+      .burning-text {
+        background-image: url(img/fire3.gif);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .letter-spacing {
+        letter-spacing: 2rem;
+        animation: letter-spacing-ani 1s ease-out forwards;
+        animation-iteration-count: 1;
+      }
+
+      @keyframes letter-spacing-ani {
+        to {
+          letter-spacing: normal;
+        }
+      }
+
+      .stonewall {
+        background-image: url(img/rock2.jpg);
+        background-position: center;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    </style>
+    <link rel="stylesheet" href="css-ani/fluid.css" />
+    <link rel="stylesheet" href="css-ani/arrow-right.css" />
+    <link rel="stylesheet" href="css-ani/blur-in.css" />
+    <link rel="stylesheet" href="css-ani/zoom-in-fast.css" />
+    <link rel="stylesheet" href="css-ani/pulse-right.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- https://bennettfeely.com/clippy/ -->
+        <section>
+          <div class="fragment addClassBelow" data-add-class="zoom-in-fast">
+            <h1 class="">Frontend <span class="devops">Dev-Ops</span></h1>
+          </div>
+          <h2 class="fragment">What is <span class="devops">Dev-Ops</span>?</h2>
+          <h2 class="fragment">What does it mean for the <span class="devops">Frontend</span>?</h2>
+          <!-- 👨‍💻 + 👷 -->
+        </section>
+
+        <section data-background="img/pondus.jpg"></section>
+
+        <section>
+          <h2>
+            Creating better software, <span class="pulse-right">faster</span>
+          </h2>
+          <img class="fragment" src="img/devops.png" style="max-width: 50%" />
+          <h2 class="fragment">Go hand in hand with Agile</h2>
+          <h2 class="fragment">Shorter development cycle</h2>
+        </section>
+
+        <section>
+          <section>
+            <div class="addClassBelow fragment" data-add-class="blur-in">
+              <h1 class="">The problem</h1>
+            </div>
+          </section>
+          <section>
+            <h2>Big, and infrequent deployments</h2>
+            <h2 class="fragment">One deploy a <span class="error">month</span></h2>
+            <h2 class="fragment">
+              One month to <span class="bug">bugfix</span>
+            </h2>
+            <h2 class="fragment">
+              Slow to get feedback on <span class="feature">feature</span>
+            </h2>
+            <h2 class="fragment">
+              Deployment <span class="interference">interference</span>
+            </h2>
+          </section>
+          <section>
+            <h2>Manual deploys are <span class="error">error</span> prone</h2>
+            <h2 class="fragment">Forget something <i>every</i> time</h2>
+            <h2 class="fragment">How fast can you do it?</h2>
+            <h1 class="fragment">Under <span class="error">pressure</span>?</h1>
+          </section>
+          <section>
+            <h1><span>Long</span> living branches</h1>
+            <h1 class="fragment">
+              Cause merge <span class="burning-text">hell</span>
+            </h1>
+          </section>
+          <section>
+            <h2>
+              Production is someone else's <span class="error">problem</span>!
+            </h2>
+            <h2 class="fragment">Different company deploys</h2>
+            <h1 class="fragment">A lack of control</h1>
+            <h1 class="fragment">And accountability</h1>
+          </section>
+          <!-- <section>
+            Adgile just fixed the development side
+            Not how to get it to production
+          </section> -->
+        </section>
+
+        <section>
+          <section>
+            <div class="addClassBelow fragment" data-add-class="blur-in">
+              <h1 class="">The solution</h1>
+            </div>
+            <h1 class="fragment"><span class="devops">Dev-Ops</span></h1>
+            <h1 class="fragment">👨‍💻 + 👷</h1>
+          </section>
+          <section>
+            <h1>A process, <i>not</i> a goal 🥅</h1>
+            <h2 class="fragment">Development + Operations</h2>
+            <h2 class="fragment">One makes the application</h2>
+            <h2 class="fragment">One gets it to production</h2>
+            <h1
+              class="addClassBelow fragment"
+              data-add-class="letter-spacing"
+            >
+              <span>Merge</span> them together
+            </h1>
+          </section>
+          <section>
+            <h1><span class="devops">Dev-Ops</span></h1>
+            <div class="fluid-container fragment">
+              <h2>Fluid term</h2>
+              <h2>Fluid term</h2>
+            </div>
+            <div class="arrow-right-container fragment">
+              <h2>Moving target</h2>
+              <h2>Moving target</h2>
+            </div>
+
+            <!-- <h2>Moving target</h2> -->
+            <h1 class="fragment">
+              Somewhat <span class="devops">Dev-Ops</span>
+            </h1>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>The elements of <span class="devops">Dev-Ops</span></h1>
+            <h2 class="fragment"><i>My</i> experience is more on <span class="devops">Dev</span> side</h2>
+          </section>
+          <section>
+            <h1 style="font-size: 2.3em">Continuous Integration (<span class="devops">CI</span>)</h1>
+            <h2
+              class="addClassBelow fragment"
+              data-add-class="letter-spacing"
+            >
+              <span>Merge</span> to master/main often
+            </h2>
+            <h1 class="fragment">Trunk</h1>
+          </section>
+          <section>
+            <h1>Continuous Delivery (<span class="devops">CD</span>)</h1>
+            <h2 class="fragment">Publish to production on <i>each</i> merge</h2>
+            <h1 class="fragment github-actions">Github Actions</h1>
+          </section>
+          <section data-background="img/deploy.png"></section>
+          <section>
+            <h4>Microservices</h4>
+            <h2 class="fragment">Many small backend services</h2>
+            <h1 class="fragment">Microfrontends</h1>
+            <h1 class="fragment">Still new</h1>
+          </section>
+          <section>
+            <img src="img/micro-frontends.png" style="max-width: 70%" />
+          </section>
+          <section>
+            <h1>Infrastructure as Code</h1>
+            <h2 class="fragment" style="font-size: 1.5em">
+              Config files + automation of infrastructure
+            </h2>
+            <h1 class="fragment">Infrastructure in <span class="git">Git</span></h1>
+            <h1 class="fragment terraform">Terraform</h1>
+          </section>
+          <section>
+            <h1>Monitoring and Logging</h1>
+            <h3 class="fragment">Know instantly of production issues</h3>
+            <h3 class="fragment">Be able to understand it after it happened</h3>
+              
+              
+            </h4>
+            <h1 class="fragment application-insights">Application Insights</h1>
+          </section>
+          <section>
+            <h1>
+              <span class="devops">Communication</span><br />
+              & <br /><span class="devops">Collaboration</span>
+            </h1>
+            <h3 class="fragment">Have teams talk to each other</h3>
+            <h3 class="fragment">Great documentation 📝</h3>
+          </section>
+          <section>
+            <h1>Continuous feedback 🔁</h1>
+            <h3 class="fragment">
+              Use feedback from production to influence future development
+            </h3>
+          </section>
+          <section>
+            <!-- <h1>
+              Summary
+            </h1> -->
+            <ol>
+              <li class="">Continuous Integration (<span class="devops">CI</span>)</li>
+              <li class="fragment">Continuous Delivery (<span class="devops">CD</span>)</li>
+              <li class="fragment">Microservices</li>
+              <li class="fragment">Infrastructure as Code (<span class="devops">IaC</span>)</li>
+              <li class="fragment">Monitoring and Logging</li>
+              <li class="fragment">Communication and Collaboration</li>
+              <li class="fragment">Continuous feedback</li>
+            </ol>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Dream setup 💭</h1>
+            <h2 class="fragment">My <span class="gold">gold</span> standard</h2>
+            <h2 class="fragment">Real world different</h2>
+          </section>
+          <section>
+            <h1>Hire people you <span class="trust">trust</span></h1>
+            <h1 class="fragment">
+              Keys to the <span class="castle">castle</span>
+            </h1>
+            <h1 class="fragment">Autonomous teams</h1>
+            <h1 class="fragment">Accountability</h1>
+          </section>
+          <section>
+            <h1>Trunk-Based</h1>
+            <h1 class="fragment">Main branch <i>only</i></h1>
+            <h1 class="fragment">Short lived branching</h1>
+            <h1 class="fragment">Main is <span class="stonewall">stable</span></h1>
+          </section>
+          <section>
+            <h1>Pull request <span class="castle">gate</span> 🛑</h1>
+            <h2 class="fragment">Potentially shippable software</h2>
+            <h1 class="fragment">Feature flags 🏴‍☠️</h1>
+            <h1 class="fragment">Lots of checks ✔️</h1>
+            <h1 class="fragment">Deploy Previews</h1>
+            <!-- Lots of auto checks on PR (unit, Cypress (e2e))
+            Deploy PR to temp staging enviorment for visuall cheks (automaticly)
+            Each PR is reviewed for code quality AND bugs + design -->
+          </section>
+          <section>
+            <img src="img/deploy-preview-workflow.gif" alt="">
+          </section>
+          <section>
+            <h1>Directly to prod 🏭</h1>
+            <h2 class="fragment">Merge when <i>everyone</i> is happy</h2>
+            <h1 class="fragment">Automatic</h1>
+            <h1 class="fragment github-actions">Github Actions</h1>
+            <!-- TODO scr sht -->
+          </section>
+          <section>
+            <h1>Monitor production 🕵️</h1>
+            <h2 class="fragment">Influence future development</h2>
+          </section>
+          <section>
+            <h1>Use <span class="kanban">Kanban</span></h1>
+            <h3 class="fragment">Works better with Continuous Delivery</h3>
+          </section>
+          <section>
+            <h1>Cloud & Serverless</h1>
+            <h2 class="fragment">Infrastructure as Code (<span class="devops">IaC</span>)</h2>
+            <h2 class="fragment">Infrastructure as a service (<span class="devops">IaaS</span>)</h2>
+          </section>
+          <section>
+            <h1 class="trust">Trust</h1>
+            <h2 class="">
+              <span class="fragment">Team</span
+              ><span class="fragment">, Boss</span
+              ><span class="fragment">, Customer</span
+              ><span class="fragment">, Users</span>
+            </h2>
+          </section>
+          <section>
+            <blockquote>
+              Remember that the code and the infrastructure is just a tool for
+              solving problems. The focus should be on proving the most value
+              for the users. Take a pragmatic approach.
+            </blockquote>
+          </section>
+        </section>
+
+        <section>
+          <h1>Challenges of <span class="devops">Dev-Ops</span></h1>
+          <h3 class="fragment">Each element is not as important as the rest</h3>
+          <h2 class="fragment">Some benefits are not obvious</h2>
+          <h2 class="fragment">Can be overwhelming</h2>
+          <!-- <h2 class="fragment">Don't know fully what works</h2> -->
+          <h2 class="fragment">Will not fix a <span class="error">toxic</span> company, or culture</h2>
+        </section>
+        <!-- 
+        <section>
+          Testing is key
+          But what should you test?
+        </section> -->
+
+        <!-- <section>
+          Tips n trics?
+        </section> -->
+
+        <!-- <section>
+          Exsist toolks for each step
+          https://www.atlassian.com/devops/what-is-devops
+        </section> -->
+
+        <section>
+          <h1>Ready to go 🚀</h1>
+          <h1 class="fragment">Thanks for listening</h1>
+          <!-- <h1 class="fragment">Leave a comment</h1> -->
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        history: true,
+        controls: false,
+        progress: false,
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+
+      Reveal.addEventListener("fragmentshown", function (event) {
+        if (event.fragment.classList.value.includes("addClassBelow")) {
+          Array.from(event.fragment.children).forEach((current) => {
+            current.classList.add(
+              event.fragment.getAttribute("data-add-class")
+            );
+          });
+        }
+      });
+      Reveal.addEventListener("fragmenthidden", function (event) {
+        if (event.fragment.classList.value.includes("addClassBelow")) {
+          Array.from(event.fragment.children).forEach((current) => {
+            current.classList.remove(
+              event.fragment.getAttribute("data-add-class")
+            );
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

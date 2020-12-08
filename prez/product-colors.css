@@ -1,0 +1,214 @@
+.typescript {
+  color: #007acc !important;
+}
+
+.bcc {
+  color: #2b6abc !important;
+}
+
+.rxjsc {
+  color: #c1185a;
+}
+
+.angular {
+  color: #dd0031 !important;
+}
+
+.webrtc-orange {
+  color: #ff6600 !important;
+}
+
+.html {
+  color: #f1672c !important;
+}
+
+.css {
+  color: #008fd5 !important;
+}
+
+.js {
+  color: #8ace17 !important;
+}
+
+.kanban {
+  color: #ec2a48 !important;
+}
+
+.elvia {
+  color: #28f400 !important;
+}
+
+.backstop {
+  color: #676156 !important;
+}
+
+.major-c {
+  color: #b70010 !important;
+}
+.minor-c {
+  color: #26881f !important;
+}
+.patch-c {
+  color: #cccccc !important;
+}
+
+.github-actions {
+  color: rgb(32, 136, 255) !important;
+}
+
+.scss {
+  color: #cf649a !important;
+}
+
+.dark-theme {
+  /* color: #000000 !important; */
+}
+
+.prettier {
+  color: rgb(198, 149, 200) !important;
+}
+
+.vue {
+  color: #4fc08d !important;
+}
+
+.react {
+  color: #5ed4f4 !important;
+}
+
+.web-components {
+  color: #f06707 !important;
+}
+
+.cli {
+  color: #00ff00 !important;
+}
+
+.open-source {
+  color: #3ba137 !important;
+}
+
+.git {
+  color: #f05033 !important;
+}
+
+.computas {
+  color: #28d0f5 !important;
+}
+
+.ie {
+  color: #fad548 !important;
+}
+
+.frameworks {
+  background: linear-gradient(
+    90deg,
+    #4fc08d 25%,
+    #dd0031 35%,
+    #dd0031 65%,
+    #5ed4f4 75%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.attribute {
+  color: #8cdcfe !important;
+}
+
+.event {
+  color: #4ebc7c !important;
+}
+
+.function {
+  color: #dccd79 !important;
+}
+
+.slot {
+  color: #3f9cd6 !important;
+}
+
+.polymer {
+  color: #ff4470 !important;
+}
+
+.environment {
+  color: #81bc02 !important;
+}
+
+.nodejs {
+  color: #43853d !important;
+}
+
+.sourcetree {
+  color: #2684ff !important;
+}
+
+.vscode {
+  color: #23a7f2 !important;
+}
+
+.money {
+  color: #85bb65 !important;
+}
+
+.npm {
+  color: #cb3837 !important;
+}
+
+.firebase {
+  color: #ffca28 !important;
+}
+
+.material-icons {
+	color: #00579B !important;
+}
+
+.microsoft {
+	color: 	#00A4EF !important;
+}
+
+.folder {
+	color: #F8D775 !important;
+}
+
+.devops {
+  /* https://www.color-hex.com/color-palette/30628 */
+  color: #6293c9 !important;
+}
+
+.bug {
+  color: #E3483A !important;
+}
+.feature {
+  color: #25A9FA !important;
+}
+.terraform {
+  color: #623CE4 !important;
+}
+.application-insights {
+  color: #7030A0 !important;
+}
+.confluence {
+  color: #0049B0 !important;
+}
+.slack {
+  color: #4A154B !important;
+}
+.gold {
+  color: #FFD700 !important;
+}
+.trust {
+  color: #007acc !important;
+}
+.castle {
+  color: #7C7C7C !important;
+}
+.toxic {
+  color: #61DF26 !important;
+}
+
+.interference, .error {
+  color: #FF0908 !important;
+}

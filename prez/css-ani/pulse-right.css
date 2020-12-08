@@ -1,0 +1,15 @@
+.pulse-right {
+  /* background: linear-gradient(to right, #e72a3a 10%, #fff 50%, #5bdaff 60%); */
+  background: linear-gradient(to right, white 33%, #4fc08d 66%, white 99%);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: pulse-right-ani 1s linear infinite;
+}
+
+@keyframes pulse-right-ani {
+  to {
+    background-position: -200% center;
+  }
+}

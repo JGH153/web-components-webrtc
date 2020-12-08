@@ -1,0 +1,41 @@
+.arrow-right-container {
+	position: relative;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	height: 100px;
+	width: 500px;
+	margin: auto;
+}
+
+.arrow-right-container h2 {
+	position: absolute;
+	color: white;
+	/* transform: translate(-50%, -50%); */
+	font-size: 2em;
+}
+
+.arrow-right-container h2:nth-child(1) { 
+	color: transparent;
+	-webkit-text-stroke: 2px #03a9f4;
+}
+
+.arrow-right-container h2:nth-child(2) { 
+	color: #03a9f4;
+	-webkit-text-stroke: 2px #03a9f4;
+	animation: arrow-right-animation 3s linear;
+	animation-iteration-count: infinite;
+}
+
+@keyframes arrow-right-animation {
+	0% {
+		clip-path: polygon(-100% 20%, -140% 20%, -160% 0%, -100% 50%, -140% 100%, -140% 80%, -100% 80%);
+		/* clip-path: polygon(-100% 34%, -140% 33%, -160% 14%, -100% 49%, -140% 83%, -140% 66%, -100% 67%); */
+	}
+	100% {
+		clip-path: polygon(100% 20%, 160% 20%, 160% 0%, 200% 49%, 160% 100%, 160% 80%, 100% 80%);
+		/* clip-path: polygon(100% 34%, 160% 33%, 160% 14%, 200% 50%, 160% 83%, 160% 66%, 100% 67%); */
+	}
+}
