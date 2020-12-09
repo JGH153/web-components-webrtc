@@ -42,55 +42,6 @@
       .opacity-hidden {
         opacity: 0;
       }
-
-      .npm-script {
-        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
-        background: #272822;
-        text-align: left;
-        font-family: monospace;
-        text-transform: none;
-        font-size: 30px;
-        width: 89%;
-        margin: auto;
-        padding: 2px 6px;
-        margin-bottom: 5px;
-      }
-
-      .npm-script .ng {
-        color: #cb3837;
-      }
-      .npm-script .args {
-        color: #767676;
-      }
-
-      blockquote {
-        padding: 5px 15px !important;
-      }
-
-      .burning-text {
-        background-image: url(img/fire3.gif);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      .letter-spacing {
-        letter-spacing: 2rem;
-        animation: letter-spacing-ani 1s ease-out forwards;
-        animation-iteration-count: 1;
-      }
-
-      @keyframes letter-spacing-ani {
-        to {
-          letter-spacing: normal;
-        }
-      }
-
-      .stonewall {
-        background-image: url(img/rock2.jpg);
-        background-position: center;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
     </style>
     <link rel="stylesheet" href="css-ani/fluid.css" />
     <link rel="stylesheet" href="css-ani/arrow-right.css" />
@@ -104,7 +55,7 @@
         <!-- https://bennettfeely.com/clippy/ -->
         <section>
           <h1>Let's Make a Web Framework</h1>
-          <h2>With Web Components and Webpack</h2>
+          <h2>With <span class="web-components">Web Components</span> and <span class="webpack">Webpack</span></h2>
           <h3>Jan Greger Hemb</h3>
         </section>
 
@@ -114,19 +65,15 @@
         </section>
 
         <section>
-          <h1>Focus on Web Components</h1>
-          <h1 class="fragment">Not WebRTC</h1>
-          <h1 class="fragment">Video for future</h1>
+          <h1>Focus on <span class="web-components">Web Components</span></h1>
+          <h1 class="fragment">Not <span class="webrtc-orange">WebRTC</span></h1>
+          <h1 class="fragment"><span class="youtube">Video</span> for future</h1>
         </section>
 
         <section>
           <h1>Project overview</h1>
           <h2 class="fragment">Code on Github</h2>
-        </section>
-
-        <section>
-          <h1>What I have</h1>
-          <h2 class="fragment">Angular like structure</h2>
+          <h2 class="fragment"><span class="angular">Angular</span> like structure</h2>
         </section>
 
         <section>
@@ -136,46 +83,57 @@
             <li class="fragment">Modules</li>
             <li class="fragment">Routing</li>
             <li class="fragment">Build system</li>
-            <li class="fragment">Super modern JS</li>
-            <li class="fragment">Google Meet "clone" with WebRTC</li>
+            <li class="fragment">Super modern <span class="js">JS</span></li>
+            <li class="fragment">Google Meet "clone" with <span class="webrtc-orange">WebRTC</span></li>
           </ul>
         </section>
 
         <section>
-          <h1>Let's learn Webpack</h1>
-          <h2 class="fragment">All files cramped into one</h2>
-          <!-- <h2 class="fragment">Even HTML and CSS</h2> -->
-          <h2 class="fragment">Live reload, hot reload</h2>
-          <h2 class="fragment">Webpack don't understand stage 3 JS</h2>
-          <h2 class="fragment">Loader ➡️ Babel</h2>
-          <h2 class="fragment">Babel = new JS ➡️ old JS</h2>
-        </section>
-
-        <section>
-          <h1>Less than 20KB</h1>
-          <h2 class="fragment">Only firebase as dependency</h2>
-          <h1 class="fragment">Let's look at bundle</h1>
-        </section>
-
-        <section>
-          <h1>Web Component?</h1>
+          <h1><span class="web-components">Web Component</span>?</h1>
           <h2 class="fragment js">Custom elements (JS)</h2>
           <h2 class="html fragment">HTML templates (HTML)</h2>
           <h2 class="css fragment">Shadow DOM (CSS)</h2>
           <!-- Show about page -->
           <h2 class="fragment">Universal, everlasting</h2>
-          <h2 class="fragment">Super modern JS</h2>
+          <h2 class="fragment">Super modern <span class="js">JS</span></h2>
         </section>
 
         <section>
           <h1 class="">Limitations</h1>
 
-          <h2 class="fragment">HTML import</h2>
-          <h2 class="fragment">Dead HTML</h2>
-          <h2 class="fragment">CSS shadow piercing</h2>
+          <h2 class="fragment"><span class="html">HTML</span> import</h2>
+          <h2 class="fragment">Dead <span class="html">HTML</span></h2>
+          <h2 class="fragment"><span class="css">CSS</span> shadow piercing</h2>
           <h2 class="fragment" style="text-decoration: line-through">Browser support</h2>
 
           <h2 class="fragment">No framework features</h2>
+        </section>
+
+        <section>
+          <h1>Let's learn <span class="webpack">Webpack</span></h1>
+          <h2 class="fragment">All files cramped into one</h2>
+          <h2 class="fragment">Even <span class="html">HTML</span> and <span class="css">CSS</span></h2>
+          <h2 class="fragment">Live reload, hot reload</h2>
+          <h2 class="fragment">Don't understand stage 3 <span class="js">JS</span></h2>
+          <h2  class="fragment">Need loader</h2>
+        </section>
+
+        <section>
+          <h1 class="babel">Babel</h1>
+          <!-- <h2 class="fragment">Loader ➡️ <span class="babel">Babel</span></h2> -->
+          <h2 class="fragment">
+            <span class="babel">Babel</span> = new <span class="js">JS</span> ➡️ old <span class="js">JS</span>
+          </h2>
+          <h2 class="fragment">Makes code slower</h2>
+          <h2 class="fragment">Browser support</h2>
+          <h2 class="fragment">github.com/tc39/proposals</h2>
+        </section>
+
+        <section>
+          <h1>Less than 20KB</h1>
+          <h2 class="fragment">Only <span class="firebase">firebase</span> as dependency</h2>
+          <h2 class="fragment">Rest shipped with browser</h2>
+          <h1 class="fragment">Let's look at bundle</h1>
         </section>
 
         <section>
@@ -187,26 +145,36 @@
         </section>
 
         <section>
+          <h1 class="">Routing</h1>
+          <h2 class="fragment">Single Page Application</h2>
+          <h2 class="fragment">All request to <span class="html">index.html</span></h2>
+          <h2 class="fragment"><span class="js">window</span>.history<span class="fragment">.state</span></h2>
+          <h2 class="fragment"><span class="js">window</span>.addEventListener("popstate")</h2>
+          <h2 class="fragment">Reconstruct page from URL</h2>
+        </section>
+
+        <section>
           <h1>What's missing</h1>
-          <h1 class="fragment">TypeScript</h1>
+          <h1 class="fragment typescript">TypeScript</h1>
           <h1 class="fragment">Render loop</h1>
+          <h2 class="fragment">No Two way data binding</h2>
           <!-- <h1 class="fragment">Generate components</h1> -->
           <h1 class="fragment">Not a full framework</h1>
         </section>
 
         <section>
-          <h1>Polymer</h1>
+          <h1 class="polymer">Polymer</h1>
         </section>
 
         <section>
-          <h1>The rest</h1>
-          <h2 class="fragment">Out of time</h2>
+          <h1 class="">Out of time</h1>
         </section>
 
         <section>
           <h1>Ready to go 🚀</h1>
-          <h1 class="fragment">Thanks for listening</h1>
-          <h1 class="fragment">Bye Computas 👋</h1>
+          <h1 class="fragment">Rest on <span class="youtube">Youtube</span></h1>
+          <!-- <h1 class="fragment">Thanks for listening</h1> -->
+          <h1 class="fragment">Bye <span class="computas">Computas</span> 👋</h1>
           <!-- <h1 class="fragment">Leave a comment</h1> -->
         </section>
       </div>

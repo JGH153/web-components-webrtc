@@ -12,6 +12,7 @@ create generic text-input component that uses WC inputs and event outputs correc
 
 throw back to home if reload on room
 
+URL number id on room
 
 ----
 Webrtc flow

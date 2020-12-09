@@ -42,12 +42,17 @@ export class PageRouter extends HTMLElement {
     newPage.id = elementId;
     newPage.addEventListener("ChangePage", (event) => this.gotoNewPage(event.detail));
     this.shadowRoot.appendChild(newPage);
+
+    const title = this.#currentPage.title;
+    document.title = title;
   }
 
   #addToHistory() {
-    const title = this.#currentPage.title;
-    document.title = title;
-    window.history.pushState(this.#currentPage, title, window.location.origin + this.#currentPage.path);
+    window.history.pushState(
+      this.#currentPage,
+      this.#currentPage.title,
+      window.location.origin + this.#currentPage.path
+    );
   }
 
   #getCurrentPageFromUrl() {

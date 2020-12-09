@@ -101,13 +101,7 @@
 }
 
 .frameworks {
-  background: linear-gradient(
-    90deg,
-    #4fc08d 25%,
-    #dd0031 35%,
-    #dd0031 65%,
-    #5ed4f4 75%
-  );
+  background: linear-gradient(90deg, #4fc08d 25%, #dd0031 35%, #dd0031 65%, #5ed4f4 75%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -162,15 +156,15 @@
 }
 
 .material-icons {
-	color: #00579B !important;
+  color: #00579b !important;
 }
 
 .microsoft {
-	color: 	#00A4EF !important;
+  color: #00a4ef !important;
 }
 
 .folder {
-	color: #F8D775 !important;
+  color: #f8d775 !important;
 }
 
 .devops {
@@ -179,36 +173,49 @@
 }
 
 .bug {
-  color: #E3483A !important;
+  color: #e3483a !important;
 }
 .feature {
-  color: #25A9FA !important;
+  color: #25a9fa !important;
 }
 .terraform {
-  color: #623CE4 !important;
+  color: #623ce4 !important;
 }
 .application-insights {
-  color: #7030A0 !important;
+  color: #7030a0 !important;
 }
 .confluence {
-  color: #0049B0 !important;
+  color: #0049b0 !important;
 }
 .slack {
-  color: #4A154B !important;
+  color: #4a154b !important;
 }
 .gold {
-  color: #FFD700 !important;
+  color: #ffd700 !important;
 }
 .trust {
   color: #007acc !important;
 }
 .castle {
-  color: #7C7C7C !important;
+  color: #7c7c7c !important;
 }
 .toxic {
-  color: #61DF26 !important;
+  color: #61df26 !important;
 }
 
-.interference, .error {
-  color: #FF0908 !important;
+.interference,
+.error {
+  color: #ff0908 !important;
+}
+
+.youtube {
+  color: rgb(255, 0, 0) !important;
+}
+
+.webpack {
+  color: #8ed6fb !important;
+}
+
+.babel {
+  color: #f5da55 !important;
 }

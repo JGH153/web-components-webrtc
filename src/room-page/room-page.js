@@ -41,10 +41,15 @@ export class RoomPage extends HTMLElement {
   }
 
   #getDesiredCameraId(devices) {
+    const main = devices.find((current) => current.label === "Logi Capture");
     if (this.#webRTCService.getIsHost()) {
-      return devices.find((current) => current.label === "Logi Capture");
+      return main;
     } else {
-      return devices.find((current) => current.label === "Microsoft® LifeCam Studio(TM) (045e:0772)");
+      const extra = devices.find((current) => current.label === "Microsoft® LifeCam Studio(TM) (045e:0772)");
+      if (extra) {
+        return extra;
+      }
+      return main;
     }
   }
 
