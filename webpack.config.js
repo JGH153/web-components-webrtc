@@ -46,7 +46,7 @@ module.exports = (env, argv) => {
       ],
     },
     plugins: [
-      new CleanWebpackPlugin(),
+      // new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         template: "./src/index.html", // template file
         filename: "index.html", // output file

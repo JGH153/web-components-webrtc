@@ -48,7 +48,7 @@ export class PageRouter extends HTMLElement {
   }
 
   #addToHistory() {
-    window.history.pushState(
+    history.pushState(
       this.#currentPage,
       this.#currentPage.title,
       window.location.origin + this.#currentPage.path
