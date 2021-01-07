@@ -1,3 +1,4 @@
+/** Create shadow and merge html + css */
 export const setupShadow = (element, html, css) => {
   const shadow = element.attachShadow({ mode: "open" });
   const template = document.createElement("template");
@@ -8,7 +9,7 @@ export const setupShadow = (element, html, css) => {
   return shadow;
 };
 
-/** saving global reference to window. Use this. in html */
+/** Saving global component reference to window and replacing this. in html with reference */
 const attachCallbacks = (html, element) => {
   const lastId = Window.lastComponentId ? Window.lastComponentId : 0;
   const componentId = lastId + 1;

@@ -28,7 +28,7 @@ export class PageRouter extends HTMLElement {
 
   gotoNewPage(newPage) {
     this.#currentPage = newPage;
-    this.#addToHistory();
+    this.#addCurrentPageToHistory();
     this.#renderCorrectPage();
   }
 
@@ -38,6 +38,7 @@ export class PageRouter extends HTMLElement {
     if (prevPage) {
       this.shadowRoot.removeChild(prevPage);
     }
+
     const newPage = document.createElement(this.#currentPage.component);
     newPage.id = elementId;
     newPage.addEventListener("ChangePage", (event) => this.gotoNewPage(event.detail));
@@ -47,12 +48,8 @@ export class PageRouter extends HTMLElement {
     document.title = title;
   }
 
-  #addToHistory() {
-    history.pushState(
-      this.#currentPage,
-      this.#currentPage.title,
-      window.location.origin + this.#currentPage.path
-    );
+  #addCurrentPageToHistory() {
+    history.pushState(this.#currentPage, this.#currentPage.title, window.location.origin + this.#currentPage.path);
   }
 
   #getCurrentPageFromUrl() {

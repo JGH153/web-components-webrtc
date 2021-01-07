@@ -19,7 +19,7 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// define all custom elements (components)
+// Define all custom elements (components)
 customElements.define("page-router", PageRouter);
 customElements.define("home-page", HomePage);
 customElements.define("about-page", AboutPage);
@@ -27,5 +27,5 @@ customElements.define("room-page", RoomPage);
 customElements.define("room-video", RoomVideo);
 customElements.define("room-chat", RoomChat);
 
-// define all custom elements (directives)
+// Define all custom elements (directives)
 customElements.define("text-input", TextInput, { extends: "input" });

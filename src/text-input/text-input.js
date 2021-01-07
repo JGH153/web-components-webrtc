@@ -1,4 +1,8 @@
 export class TextInput extends HTMLInputElement {
+  constructor() {
+    super();
+  }
+
   connectedCallback() {
     this.validate();
     this.addEventListener("keyup", this.validate.bind(this));

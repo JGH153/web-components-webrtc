@@ -12,8 +12,6 @@ export class DataChannelService {
     DataChannelService.#instance = this;
   }
 
-  // TODO on message callback func
-
   getNewMessages(callbackOnMessage) {
     this.#callbackOnMessage = callbackOnMessage;
   }

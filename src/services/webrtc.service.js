@@ -1,4 +1,4 @@
-import { DataChannelService } from "./dataChannel.service";
+import { DataChannelService } from "./data-channel.service";
 import { FirebaseService } from "./firebase.service";
 
 export class WebRTCService {
@@ -65,7 +65,6 @@ export class WebRTCService {
         this.#firebaseService.saveIce(this.#roomID, event.candidate.toJSON(), this.#isHost);
       } else {
         // console.log(" All ICE candidates have been sent");
-        // console.log("Other!", event);
       }
     };
 

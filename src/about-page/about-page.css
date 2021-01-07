@@ -15,3 +15,7 @@ h1 {
   min-width: 300px;
 }
 
+.img {
+  max-width: 800px;
+  margin-bottom: 20px;
+}

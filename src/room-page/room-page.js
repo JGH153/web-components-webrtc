@@ -2,7 +2,7 @@ import html from "./room-page.html";
 import css from "./room-page.css";
 import { setupShadow } from "../helpers";
 import { WebRTCService } from "../services/webrtc.service";
-import { DataChannelService } from "../services/dataChannel.service";
+import { DataChannelService } from "../services/data-channel.service";
 import { Pages } from "../models/Pages";
 
 export class RoomPage extends HTMLElement {
@@ -20,8 +20,7 @@ export class RoomPage extends HTMLElement {
   connectedCallback() {
     // no room id, no fun
     if (!this.#webRTCService.getRoomId()) {
-      const event = new CustomEvent("ChangePage", { detail: Pages.Home });
-      this.dispatchEvent(event);
+      this.#returnToHome();
       return false;
     }
 
@@ -29,13 +28,21 @@ export class RoomPage extends HTMLElement {
     this.shadowRoot.getElementById("roomID").innerText = this.#roomID;
     if (this.#webRTCService.getIsHost()) {
       this.addRoomIdToClipboard();
+      this.sendBcMessageWithRoomId();
     }
     this.setupVideo();
   }
 
+  #returnToHome() {
+    const event = new CustomEvent("ChangePage", { detail: Pages.Home });
+    this.dispatchEvent(event);
+  }
+
   async addRoomIdToClipboard() {
     await navigator.clipboard.writeText(this.#roomID);
-    // send to other tab auto
+  }
+
+  sendBcMessageWithRoomId() {
     const bc = new BroadcastChannel("room-auto-join");
     bc.postMessage(this.#roomID);
   }
@@ -55,19 +62,20 @@ export class RoomPage extends HTMLElement {
 
   async setupVideo() {
     const devices = await navigator.mediaDevices.enumerateDevices();
+    let videoResRequest = { width: { ideal: 1920 }, height: { ideal: 1080 }, frameRate: { ideal: 60 } };
+
     const desired = this.#getDesiredCameraId(devices);
-    const videoResRequest = { width: { ideal: 1920 }, height: { ideal: 1080 }, frameRate: { ideal: 60 } };
-    let request = { video: videoResRequest, audio: false };
     if (desired) {
-      request = { video: { deviceId: desired.deviceId }, audio: false };
+      videoResRequest = { ...videoResRequest, deviceId: desired.deviceId };
     }
+    const request = { video: videoResRequest, audio: false };
 
     // navigator.mediaDevices.getDisplayMedia().then(
     navigator.mediaDevices.getUserMedia(request).then(
       (stream) => this.onUserAllowVideo(stream),
       (error) => {
         console.warn(error);
-        alert("Can't get camera :(");
+        alert("Can't get camera 😞");
       }
     );
   }
@@ -83,8 +91,8 @@ export class RoomPage extends HTMLElement {
     this.#localVideoStream = stream;
     this.#webRTCService.setupPeerConnection(this.#localVideoStream, this.onRemoteVideo.bind(this));
 
+    // console.log(JSON.stringify(this.#localVideoStream)); // can't stringify MediaStream
     const videoElement = this.shadowRoot.getElementById("video");
-    // console.log(SON.stringify(this.#localVideoStream)); // can't stringify MediaStream
     videoElement.setLocalVideo(this.#localVideoStream);
 
     this.#webRTCService.connectToOtherPerson();
