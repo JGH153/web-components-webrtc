@@ -9,6 +9,7 @@
 
 #remoteVideo {
   width: 100%;
+  max-height: 800px;
 }
 #localVideo {
   position: absolute;
