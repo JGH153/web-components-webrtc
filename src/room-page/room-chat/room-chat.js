@@ -2,7 +2,7 @@ import html from "./room-chat.html";
 import css from "./room-chat.css";
 import { setupShadow } from "../../helpers";
 import { WebRTCService } from "../../services/webrtc.service";
-import { DataChannelService } from "../../services/dataChannel.service";
+import { DataChannelService } from "../../services/data-channel.service";
 
 export class RoomChat extends HTMLElement {
   #webRTCService = new WebRTCService();

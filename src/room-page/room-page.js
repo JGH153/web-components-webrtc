@@ -45,6 +45,7 @@ export class RoomPage extends HTMLElement {
   sendBcMessageWithRoomId() {
     const bc = new BroadcastChannel("room-auto-join");
     bc.postMessage(this.#roomID);
+    bc.close();
   }
 
   #getDesiredCameraId(devices) {
