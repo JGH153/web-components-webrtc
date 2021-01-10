@@ -6,7 +6,6 @@ export const setupShadow = (element, html, css) => {
   template.innerHTML = '<style>@import "styles.css";' + css + "</style>" + attachCallbacks(html, element);
   const templateContent = template.content;
   shadow.appendChild(templateContent.cloneNode(true));
-  return shadow;
 };
 
 /** Saving global component reference to window and replacing this. in html with reference */

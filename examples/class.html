@@ -1,0 +1,29 @@
+<script>
+
+  class MyService {
+    static #instance;
+
+    randomNum = Math.random();
+
+    constructor() {
+      if (MyService.#instance) {
+        return MyService.#instance;
+      }
+      MyService.#instance = this;
+    }
+  }
+
+  const myService1 = new MyService();
+  const myService2 = new MyService();
+  const myService3 = new MyService();
+
+  console.log(myService1.randomNum);
+  console.log(myService2.randomNum);
+  console.log(myService3.randomNum);
+
+</script>
+<style>
+    * {
+        background: black;
+    }
+</style>
