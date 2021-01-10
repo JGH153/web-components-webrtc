@@ -26,12 +26,6 @@ export class PageRouter extends HTMLElement {
     });
   }
 
-  gotoNewPage(newPage) {
-    this.#currentPage = newPage;
-    this.#addCurrentPageToHistory();
-    this.#renderCorrectPage();
-  }
-
   #renderCorrectPage() {
     const elementId = "CurrentPage";
     const prevPage = this.shadowRoot.getElementById(elementId);
@@ -41,15 +35,27 @@ export class PageRouter extends HTMLElement {
 
     const newPage = document.createElement(this.#currentPage.component);
     newPage.id = elementId;
-    newPage.addEventListener("ChangePage", (event) => this.gotoNewPage(event.detail));
+    newPage.addEventListener("ChangePage", (event) =>
+      this.#gotoNewPage(event.detail)
+    );
     this.shadowRoot.appendChild(newPage);
 
     const title = this.#currentPage.title;
     document.title = title;
   }
 
+  #gotoNewPage(newPage) {
+    this.#currentPage = newPage;
+    this.#addCurrentPageToHistory();
+    this.#renderCorrectPage();
+  }
+
   #addCurrentPageToHistory() {
-    history.pushState(this.#currentPage, this.#currentPage.title, window.location.origin + this.#currentPage.path);
+    history.pushState(
+      this.#currentPage,
+      this.#currentPage.title,
+      window.location.origin + this.#currentPage.path
+    );
   }
 
   #getCurrentPageFromUrl() {
