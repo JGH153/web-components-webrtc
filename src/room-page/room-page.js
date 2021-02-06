@@ -63,7 +63,7 @@ export class RoomPage extends HTMLElement {
 
   async setupVideo() {
     const devices = await navigator.mediaDevices.enumerateDevices();
-    let videoResRequest = { width: { ideal: 1920 }, height: { ideal: 1080 }, frameRate: { ideal: 60 } };
+    let videoResRequest = { width: { ideal: 720 }, height: { ideal: 480 }, frameRate: { ideal: 30 } };
 
     const desired = this.#getDesiredCameraId(devices);
     if (desired) {
